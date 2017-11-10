@@ -10,7 +10,12 @@ export default class DefinitionForm extends React.Component {
 
 	handleSubmit = event => {
 		event.preventDefault();
-		this.props.onAdd(this.state.input);
+		let defObj = {
+			part_of_speech: this.state.partOfSpeech,
+			definition_text: this.state.definition,
+			sentence: this.state.sentence
+		};
+		this.props.onAdd(defObj);
 		this.setState({
 			word: '',
 			partOfSpeech: '',
@@ -40,25 +45,26 @@ export default class DefinitionForm extends React.Component {
 	render() {
 		return (
 			<div>
+				{this.props.displayWord()}
 				<form onSubmit={this.handleSubmit}>
 					<input
 						type="radio"
 						name="part-of-speech"
-						value="this.state.partOfSpeech"
+						value="noun"
 						onChange={this.handlePartOfSpeech}
 					/>{' '}
 					noun<br />
 					<input
 						type="radio"
 						name="part-of-speech"
-						value="this.state.partOfSpeech"
+						value="verb"
 						onChange={this.handlePartOfSpeech}
 					/>{' '}
 					verb<br />
 					<input
 						type="radio"
 						name="part-of-speech"
-						value="this.state.partOfSpeech"
+						value="adjective"
 						onChange={this.handlePartOfSpeech}
 					/>{' '}
 					adjective<br />

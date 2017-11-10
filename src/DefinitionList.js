@@ -18,16 +18,21 @@ export default class DefinitionList extends React.Component {
 	}
 
 	displayDefinitions() {
-		return this.state.definitions.map(def => {
-			return (
-				<div>
-					<ul>
-						<li>{def.part_of_speech}</li>
-						<li>{def.definition_text}</li>
-						<li>{def.sentence}</li>
-					</ul>
-				</div>
-			);
+		return this.state.definitions.map((def, index) => {
+			if (def.word) {
+				return (
+					<div>
+						<ul key="index">
+							<h2>{def.word.word}</h2>
+							<li>Part of Speech: {def.part_of_speech}</li>
+							<li>Definition: {def.definition_text}</li>
+							<li>Sentence: "{def.sentence}"</li>
+						</ul>
+					</div>
+				);
+			} else {
+				return <p>loading...</p>;
+			}
 		});
 	}
 

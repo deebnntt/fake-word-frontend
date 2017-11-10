@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import NavBar from './NavBar.js';
 import DefinitionContainer from './DefinitionContainer.js';
-import DefinitionForm from './DefinitionForm.js';
 import DefinitionList from './DefinitionList.js';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -14,7 +13,7 @@ class App extends Component {
 					<NavBar />
 					<h1 className="App-title">Fake Word App</h1>
 					<Route exact path="/" render={() => <h1>Welcome</h1>} />
-					<Route exact path="/new" component={DefinitionContainer} />
+					<Route path="/" component={DefinitionContainer} />
 					<Route exact path="/list" component={DefinitionList} />
 				</div>
 			</Router>
