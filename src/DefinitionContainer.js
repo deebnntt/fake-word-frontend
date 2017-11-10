@@ -6,7 +6,7 @@ export default class DefinitionContainer extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			words: [],
+			words: [{}],
 			word: ''
 		};
 	}
@@ -17,17 +17,12 @@ export default class DefinitionContainer extends React.Component {
 				words: json
 			})
 		);
-		this.displayWord();
 	}
 
 	displayWord() {
-		debugger;
-		let randomI = Math.floor(Math.random() * this.state.words.length);
-		return (
-			<div>
-				<p>{this.state.words[randomI].word}</p>
-			</div>
-		);
+		const arr = [...this.state.words];
+		const randomI = Math.floor(Math.random() * arr.length);
+		return <div>{arr[randomI].word}</div>;
 	}
 
 	render() {

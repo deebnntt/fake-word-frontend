@@ -15,6 +15,11 @@ class NavBar extends Component {
 							Create New
 						</NavLink>
 					</li>
+					<li>
+						<NavLink to="/list" exact>
+							Definitions
+						</NavLink>
+					</li>
 				</ul>
 			</div>
 		);
