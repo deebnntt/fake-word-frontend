@@ -4,21 +4,10 @@ import { fetchDefinitions } from './fetch.js';
 export default class DefinitionList extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			definitions: [{}]
-		};
-	}
-
-	componentDidMount() {
-		fetchDefinitions().then(json =>
-			this.setState({
-				definitions: json
-			})
-		);
 	}
 
 	displayDefinitions() {
-		return this.state.definitions.map((def, index) => {
+		return this.props.definitions.map((def, index) => {
 			if (def.word) {
 				return (
 					<div>
@@ -27,6 +16,9 @@ export default class DefinitionList extends React.Component {
 							<li>Part of Speech: {def.part_of_speech}</li>
 							<li>Definition: {def.definition_text}</li>
 							<li>Sentence: "{def.sentence}"</li>
+							<button value={def.id} type="button" onClick={this.props.onLike}>
+								Like
+							</button>
 						</ul>
 					</div>
 				);

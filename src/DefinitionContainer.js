@@ -1,7 +1,9 @@
 import React from 'react';
+import DefinitionList from './DefinitionList.js';
 import DefinitionForm from './DefinitionForm.js';
 import DefinitionShow from './DefinitionShow.js';
 import { fetchWords } from './fetch.js';
+import { fetchDefinitions } from './fetch.js';
 import { Route } from 'react-router-dom';
 
 export default class DefinitionContainer extends React.Component {
@@ -11,11 +13,17 @@ export default class DefinitionContainer extends React.Component {
 			words: [{}],
 			currentWord: {},
 			redirect: false,
-			definitionId: null
+			definitionId: null,
+			definitions: [{}]
 		};
 	}
 
 	componentWillMount() {
+		fetchDefinitions().then(json =>
+			this.setState({
+				definitions: json
+			})
+		);
 		fetchWords().then(json =>
 			this.setState(
 				{
@@ -81,10 +89,35 @@ export default class DefinitionContainer extends React.Component {
 			});
 	};
 
+	handleLike = event => {
+		let id = event.target.value;
+    let obj = { likes: ++ }
+		fetch(`http://localhost:3000/api/v1/definitions/{id}`, {
+			method: 'post',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(obj)
+		});
+	};
+
 	render() {
 		console.log('Container');
 		return (
 			<div>
+				<Route
+					exact
+					path="/"
+					render={() => {
+						return (
+							<DefinitionList
+								onLike={this.handleLike}
+								definitions={this.state.definitions}
+							/>
+						);
+					}}
+				/>
 				<Route
 					path="/new"
 					render={() => {
