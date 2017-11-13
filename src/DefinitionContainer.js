@@ -2,6 +2,7 @@ import React from 'react';
 import DefinitionList from './DefinitionList.js';
 import DefinitionForm from './DefinitionForm.js';
 import DefinitionShow from './DefinitionShow.js';
+import DefinitionFilter from './DefinitionFilter.js';
 import DefinitionSearch from './DefinitionSearch.js';
 import { fetchWords } from './fetch.js';
 import { fetchDefinitions } from './fetch.js';
@@ -58,9 +59,18 @@ export default class DefinitionContainer extends React.Component {
 		);
 	};
 
-	handleSearch = term => {
+	handleFilter = event => {
+		let term = event.target.value;
 		console.log(term);
-		console.log(this.state.definitions);
+		const filteredDefinitions = this.state.allDefinitions.filter(def => {
+			return def.part_of_speech === term;
+		});
+		this.setState({
+			definitions: filteredDefinitions
+		});
+	};
+
+	handleSearch = term => {
 		const filteredDefinitions = this.state.allDefinitions.filter(def => {
 			return def.definition_text.includes(term) || def.sentence.includes(term);
 		});
@@ -138,6 +148,7 @@ export default class DefinitionContainer extends React.Component {
 					render={() => {
 						return (
 							<div>
+								<DefinitionFilter onChange={this.handleFilter} />
 								<DefinitionSearch onSearch={this.handleSearch} />
 								<DefinitionList
 									onLike={this.handleLike}
