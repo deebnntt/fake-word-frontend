@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 
 export default class DefinitionFilter extends React.Component {
-	state = {
-		input: ''
-	};
-
 	render() {
 		return (
 			<div>
 				<form onChange={this.props.onChange}>
+					<input
+						type="radio"
+						name="part-of-speech"
+						value="all"
+						onChange={this.handleChange}
+					/>{' '}
+					all<br />
 					<input
 						type="radio"
 						name="part-of-speech"

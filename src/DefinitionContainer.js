@@ -4,6 +4,8 @@ import DefinitionForm from './DefinitionForm.js';
 import DefinitionShow from './DefinitionShow.js';
 import DefinitionFilter from './DefinitionFilter.js';
 import DefinitionSearch from './DefinitionSearch.js';
+import DefinitionSort from './DefinitionSort.js';
+import WordShow from './WordShow.js';
 import { fetchWords } from './fetch.js';
 import { fetchDefinitions } from './fetch.js';
 import { Route } from 'react-router-dom';
@@ -63,7 +65,11 @@ export default class DefinitionContainer extends React.Component {
 		let term = event.target.value;
 		console.log(term);
 		const filteredDefinitions = this.state.allDefinitions.filter(def => {
-			return def.part_of_speech === term;
+			if (term === 'all') {
+				return def;
+			} else {
+				return def.part_of_speech === term;
+			}
 		});
 		this.setState({
 			definitions: filteredDefinitions
@@ -76,6 +82,27 @@ export default class DefinitionContainer extends React.Component {
 		});
 		this.setState({
 			definitions: filteredDefinitions
+		});
+	};
+
+	handleSort = event => {
+		let sortBy = event.target.value.toString();
+		let sorted = [];
+		if (sortBy === 'id') {
+			sorted = this.state.definitions.sort(function(a, b) {
+				if (a.id < b.id) return 1;
+				else if (a.id > b.id) return -1;
+				return 0;
+			});
+		} else if (sortBy === 'likes') {
+			sorted = this.state.definitions.sort(function(a, b) {
+				if (a.likes < b.likes) return 1;
+				else if (a.likes > b.likes) return -1;
+				return 0;
+			});
+		}
+		this.setState({
+			definitions: sorted
 		});
 	};
 
@@ -113,6 +140,8 @@ export default class DefinitionContainer extends React.Component {
 			});
 	};
 
+	handleClick = wordId => {};
+
 	handleLike = event => {
 		let id = event.target.value;
 		let newDefinitions = this.state.definitions.map(def => {
@@ -148,9 +177,14 @@ export default class DefinitionContainer extends React.Component {
 					render={() => {
 						return (
 							<div>
+								<DefinitionSort onSort={this.handleSort} />
+								<br />
 								<DefinitionFilter onChange={this.handleFilter} />
+								<br />
 								<DefinitionSearch onSearch={this.handleSearch} />
+								<br />
 								<DefinitionList
+									onClick={this.handleClick}
 									onLike={this.handleLike}
 									definitions={this.state.definitions}
 								/>
@@ -161,7 +195,6 @@ export default class DefinitionContainer extends React.Component {
 				<Route
 					path="/new"
 					render={() => {
-						console.log('Hey Matching');
 						return (
 							<DefinitionForm
 								onAdd={this.handlePost}
@@ -176,6 +209,7 @@ export default class DefinitionContainer extends React.Component {
 						<DefinitionShow {...props} definition={this.state.newDefinition} />
 					)}
 				/>
+				<Route path="/words/:id" render={props => <WordShow {...props} />} />
 			</div>
 		);
 	}

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { fetchDefinitions } from './fetch.js';
 
 export default class DefinitionList extends React.Component {
@@ -18,7 +19,9 @@ export default class DefinitionList extends React.Component {
 				return (
 					<div>
 						<ul key="index">
-							<h2>{def.word.word}</h2>
+							<h2>
+								<Link to={`/words/${def.word.id}`}>{def.word.word}</Link>
+							</h2>
 							<li>Part of Speech: {def.part_of_speech}</li>
 							<li>Definition: {def.definition_text}</li>
 							<li>Sentence: "{def.sentence}"</li>
@@ -34,7 +37,7 @@ export default class DefinitionList extends React.Component {
 							</li>
 						</ul>
 					</div>
-				);
+				)
 			} else {
 				return <p>loading...</p>;
 			}
@@ -42,6 +45,6 @@ export default class DefinitionList extends React.Component {
 	}
 
 	render() {
-		return <div>{this.displayDefinitions()}</div>;
+		return <div>{this.displayDefinitions()}</div>
 	}
 }
