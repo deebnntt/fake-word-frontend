@@ -91,9 +91,9 @@ export default class DefinitionContainer extends React.Component {
 
 	handleLike = event => {
 		let id = event.target.value;
-    let obj = { likes: ++ }
-		fetch(`http://localhost:3000/api/v1/definitions/{id}`, {
-			method: 'post',
+		let obj = { likes: 'update' };
+		fetch(`http://localhost:3000/api/v1/definitions/${id}`, {
+			method: 'put',
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json'
