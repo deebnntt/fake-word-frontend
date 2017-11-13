@@ -22,7 +22,7 @@ export default class DefinitionSearch extends React.Component {
 				<form onSubmit={this.handleSubmit}>
 					<input
 						type="text"
-						placeholder="Search by Definition or Sentence Text"
+						placeholder="Search by Word, Definition or Sentence Text"
 						value={this.state.input}
 						onChange={this.handleChange}
 					/>

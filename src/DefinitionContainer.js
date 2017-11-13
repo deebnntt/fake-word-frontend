@@ -78,7 +78,7 @@ export default class DefinitionContainer extends React.Component {
 
 	handleSearch = term => {
 		const filteredDefinitions = this.state.allDefinitions.filter(def => {
-			return def.definition_text.includes(term) || def.sentence.includes(term);
+			return def.definition_text.includes(term) || def.sentence.includes(term) || def.word.word.includes(term);
 		});
 		this.setState({
 			definitions: filteredDefinitions
