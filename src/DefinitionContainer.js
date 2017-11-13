@@ -2,6 +2,7 @@ import React from 'react';
 import DefinitionList from './DefinitionList.js';
 import DefinitionForm from './DefinitionForm.js';
 import DefinitionShow from './DefinitionShow.js';
+import DefinitionSearch from './DefinitionSearch.js';
 import { fetchWords } from './fetch.js';
 import { fetchDefinitions } from './fetch.js';
 import { Route } from 'react-router-dom';
@@ -14,14 +15,16 @@ export default class DefinitionContainer extends React.Component {
 			currentWord: {},
 			redirect: false,
 			definitionId: null,
-			definitions: [{}]
+			definitions: [{}],
+			liked: 0
 		};
 	}
 
 	componentWillMount() {
 		fetchDefinitions().then(json =>
 			this.setState({
-				definitions: json
+				definitions: json,
+				allDefinitions: json
 			})
 		);
 		fetchWords().then(json =>
@@ -53,6 +56,17 @@ export default class DefinitionContainer extends React.Component {
 				);
 			}
 		);
+	};
+
+	handleSearch = term => {
+		console.log(term);
+		console.log(this.state.definitions);
+		const filteredDefinitions = this.state.allDefinitions.filter(def => {
+			return def.definition_text.includes(term) || def.sentence.includes(term);
+		});
+		this.setState({
+			definitions: filteredDefinitions
+		});
 	};
 
 	displayWord = () => {
@@ -91,6 +105,14 @@ export default class DefinitionContainer extends React.Component {
 
 	handleLike = event => {
 		let id = event.target.value;
+		let newDefinitions = this.state.definitions.map(def => {
+			if (parseInt(def.id) === parseInt(id)) {
+				def.likes++;
+				return def;
+			} else {
+				return def;
+			}
+		});
 		let obj = { likes: 'update' };
 		fetch(`http://localhost:3000/api/v1/definitions/${id}`, {
 			method: 'put',
@@ -99,7 +121,11 @@ export default class DefinitionContainer extends React.Component {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(obj)
-		});
+		}).then(
+			this.setState({
+				definitions: newDefinitions
+			})
+		);
 	};
 
 	render() {
@@ -111,10 +137,13 @@ export default class DefinitionContainer extends React.Component {
 					path="/"
 					render={() => {
 						return (
-							<DefinitionList
-								onLike={this.handleLike}
-								definitions={this.state.definitions}
-							/>
+							<div>
+								<DefinitionSearch onSearch={this.handleSearch} />
+								<DefinitionList
+									onLike={this.handleLike}
+									definitions={this.state.definitions}
+								/>
+							</div>
 						);
 					}}
 				/>

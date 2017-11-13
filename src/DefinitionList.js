@@ -6,6 +6,12 @@ export default class DefinitionList extends React.Component {
 		super(props);
 	}
 
+	shouldComponentUpdate(nextProps, nextState) {
+		if (nextProps) {
+			return true;
+		}
+	}
+
 	displayDefinitions() {
 		return this.props.definitions.map((def, index) => {
 			if (def.word) {
@@ -16,9 +22,16 @@ export default class DefinitionList extends React.Component {
 							<li>Part of Speech: {def.part_of_speech}</li>
 							<li>Definition: {def.definition_text}</li>
 							<li>Sentence: "{def.sentence}"</li>
-							<button value={def.id} type="button" onClick={this.props.onLike}>
-								Like
-							</button>
+							<li>
+								Likes: {def.likes}
+								<button
+									value={def.id}
+									type="button"
+									onClick={this.props.onLike}
+								>
+									Like
+								</button>
+							</li>
 						</ul>
 					</div>
 				);
