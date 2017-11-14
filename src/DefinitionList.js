@@ -34,6 +34,13 @@ export default class DefinitionList extends React.Component {
 								>
 									Like
 								</button>
+								<button
+									value={def.id}
+									type="button"
+									onClick={this.props.onDelete}
+								>
+									Delete
+								</button>
 							</li>
 						</ul>
 					</div>

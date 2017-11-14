@@ -140,7 +140,25 @@ export default class DefinitionContainer extends React.Component {
 			});
 	};
 
-	handleClick = wordId => {};
+	handleDelete = event => {
+		console.log('clicked')
+		let id = event.target.value;
+		let newDefinitions = this.state.definitions.filter(def => {
+			return parseInt(def.id) !== parseInt(id)
+		})
+		let obj = { delete: 'hi' };
+		fetch(`http://localhost:3000/api/v1/definitions/${id}`, {
+			method: 'delete',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(obj)
+		}).then(
+			this.setState({
+				definitions: newDefinitions
+				})
+			)}
 
 	handleLike = event => {
 		let id = event.target.value;
@@ -184,8 +202,8 @@ export default class DefinitionContainer extends React.Component {
 								<DefinitionSearch onSearch={this.handleSearch} />
 								<br />
 								<DefinitionList
-									onClick={this.handleClick}
 									onLike={this.handleLike}
+									onDelete={this.handleDelete}
 									definitions={this.state.definitions}
 								/>
 							</div>
