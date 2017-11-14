@@ -9,7 +9,7 @@ class App extends Component {
 		return (
 			<Router>
 				<div className="App">
-					<h1 className="App-title">Fake Word App</h1>
+					<h1 className="App-title">pseudoword</h1>
 					<NavBar />
 					<Route path="/" component={DefinitionContainer}/>
 				</div>
