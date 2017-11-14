@@ -31,9 +31,9 @@ export default class DefinitionShow extends React.Component {
 	displayDefinitions = () => {
 		if (this.state.definition) {
 			return (
-				<div>
+				<div className="chunk">
 					<ul>
-						<h3>{this.state.definition.word.word}</h3>
+						<h3 className="top-word">{this.state.definition.word.word}</h3>
 						<li><span className="def-display"> Part of Speech: </span>{this.state.definition.part_of_speech}</li>
 						<li><span className="def-display">Definition: </span>{this.state.definition.definition_text}</li>
 						<li><span className="def-display">Sentence: </span>{this.state.definition.sentence}</li>
@@ -46,6 +46,6 @@ export default class DefinitionShow extends React.Component {
 	};
 
 	render() {
-		return <div>{this.displayDefinitions()}</div>;
+		return <div className="chunk">{this.displayDefinitions()}</div>;
 	}
 }

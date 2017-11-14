@@ -31,15 +31,17 @@ export default class WordShow extends React.Component {
 	displayWord = () => {
 		return (
 			<div>
-				<h3>{this.state.word.word}</h3>
+				<h1 className="top-word">{this.state.word.word}</h1>
 				{this.state.word.definitions.map(def => {
 					return (
+						<div className="chunk">
 						<ul>
-							<li>Part of Speech: {def.part_of_speech}</li>
-							<li>Definition: {def.definition_text}</li>
-							<li>Sentence: "{def.sentence}"</li>
-							<li>Likes: {def.likes}</li>
+							<li><span className="def-display">Part of Speech: </span>{def.part_of_speech}</li>
+							<li><span className="def-display">Definition: </span>{def.definition_text}</li>
+							<li><span className="def-display">Sentence: </span> "{def.sentence}"</li>
+							<li><span className="def-display">Likes: </span>{def.likes}</li>
 						</ul>
+						</div>
 					)
 				})}
 			</div>

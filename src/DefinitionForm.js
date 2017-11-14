@@ -44,8 +44,8 @@ export default class DefinitionForm extends React.Component {
 
 	render() {
 		return (
-			<div>
-				{this.props.displayWord()}
+			<div className="chunk">
+				<h2 className="top-word">{this.props.displayWord()}</h2>
 				<form onSubmit={this.handleSubmit}>
 					<input
 						type="radio"
