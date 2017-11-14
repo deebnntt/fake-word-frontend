@@ -17,16 +17,17 @@ export default class DefinitionList extends React.Component {
 		return this.props.definitions.map((def, index) => {
 			if (def.word) {
 				return (
-					<div>
+					<div className="chunk">
 						<ul key="index">
-							<h2>
+							<h2 className="top-word">
 								<Link to={`/words/${def.word.id}`}>{def.word.word}</Link>
 							</h2>
-							<li>Part of Speech: {def.part_of_speech}</li>
-							<li>Definition: {def.definition_text}</li>
-							<li>Sentence: "{def.sentence}"</li>
+							<li><span className="title">Part of Speech: </span>{def.part_of_speech}</li>
+							<li><span className="title">Definition: </span>{def.definition_text}</li>
+							<li><span className="title">Sentence: </span>"{def.sentence}"</li>
 							<li>
-								Likes: {def.likes}
+								Likes: { (def.likes === null)? 0 : def.likes}
+								<br />
 								<button
 									value={def.id}
 									type="button"

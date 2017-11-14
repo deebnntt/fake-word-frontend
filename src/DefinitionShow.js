@@ -34,9 +34,9 @@ export default class DefinitionShow extends React.Component {
 				<div>
 					<ul>
 						<h3>{this.state.definition.word.word}</h3>
-						<li>Part of Speech: {this.state.definition.part_of_speech}</li>
-						<li>Definition: {this.state.definition.definition_text}</li>
-						<li>Sentence: {this.state.definition.sentence}</li>
+						<li><span className="def-display"> Part of Speech: </span>{this.state.definition.part_of_speech}</li>
+						<li><span className="def-display">Definition: </span>{this.state.definition.definition_text}</li>
+						<li><span className="def-display">Sentence: </span>{this.state.definition.sentence}</li>
 					</ul>
 				</div>
 			);

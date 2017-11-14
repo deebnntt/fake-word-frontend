@@ -188,7 +188,7 @@ export default class DefinitionContainer extends React.Component {
 	render() {
 		console.log('Container');
 		return (
-			<div>
+			<div className="container">
 				<Route
 					exact
 					path="/"
@@ -217,6 +217,7 @@ export default class DefinitionContainer extends React.Component {
 							<DefinitionForm
 								onAdd={this.handlePost}
 								displayWord={this.displayWord}
+								className="definition-form"
 							/>
 						);
 					}}

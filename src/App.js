@@ -9,9 +9,9 @@ class App extends Component {
 		return (
 			<Router>
 				<div className="App">
-					<NavBar />
 					<h1 className="App-title">Fake Word App</h1>
-					<Route path="/" component={DefinitionContainer} />
+					<NavBar />
+					<Route path="/" component={DefinitionContainer}/>
 				</div>
 			</Router>
 		);

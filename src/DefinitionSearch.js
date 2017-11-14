@@ -25,6 +25,7 @@ export default class DefinitionSearch extends React.Component {
 						placeholder="Search by Word, Definition or Sentence Text"
 						value={this.state.input}
 						onChange={this.handleChange}
+						className="search"
 					/>
 					<input className="button" type="submit" />
 				</form>

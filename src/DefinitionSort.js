@@ -4,7 +4,7 @@ export default class DefinitionSort extends React.Component {
 	render() {
 		return (
 			<div>
-				<select onChange={this.props.onSort}>
+				<select onChange={this.props.onSort} className="dropdown">
 					<option value="" selected disabled hidden>
 						Sort By
 					</option>
